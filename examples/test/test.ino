@@ -33,6 +33,8 @@
 #define   LVL_DIR   A2    // DIR (direction control) signal of level shifter IC connected to pin A2
 #define   LVL_OEN   A3    // /OE (output enable) signal of level shifter IC connected to pin A3
 
+#define ASCII_OFFSET 32
+
 #define    RED  0x0000FF
 #define  GREEN  0x00FF00
 #define   BLUE  0xFF0000
@@ -558,7 +560,7 @@ void OLED_Text_160128RGB(unsigned char x_pos, unsigned char y_pos, unsigned char
     OLED_WriteMemoryStart_160128RGB();
     for (count=0;count<5;count++)    // each character is 5 pixels wide
     {
-      if((Ascii_1[letter][count] & mask) == mask)
+      if((Ascii_1[letter - ASCII_OFFSET][count] & mask) == mask)
         OLED_Pixel_160128RGB(textColor);
       else
         OLED_Pixel_160128RGB(backgroundColor);
@@ -580,7 +582,7 @@ void OLED_Text2x_160128RGB(unsigned char x_pos, unsigned char y_pos, unsigned ch
     OLED_WriteMemoryStart_160128RGB();
     for (count=0;count<10;count++)    // each character is 10 pixels wide
     {
-      if((Ascii_1[letter][(count/2)] & mask) == mask)
+      if((Ascii_1[letter - ASCII_OFFSET][(count/2)] & mask) == mask)
         OLED_Pixel_160128RGB(textColor);
       else
         OLED_Pixel_160128RGB(backgroundColor);
@@ -1228,19 +1230,19 @@ void loop()                                         // main loop, runs after "se
 
   OLED_NHDText_160128RGB(GREEN, BLACK);            // show NEWHAVEN DISPLAY
 
-  OLED_Text_160128RGB(20, 58, 40, WHITE, BLACK);   // H
-  OLED_Text_160128RGB(27, 58, 69, WHITE, BLACK);   // e
-  OLED_Text_160128RGB(34, 58, 76, WHITE, BLACK);   // l
-  OLED_Text_160128RGB(41, 58, 76, WHITE, BLACK);   // l
-  OLED_Text_160128RGB(48, 58, 79, WHITE, BLACK);   // o
-  OLED_Text_160128RGB(55, 58, 0, WHITE, BLACK);    //
+  OLED_Text_160128RGB(20, 58, 'H', WHITE, BLACK);
+  OLED_Text_160128RGB(27, 58, 'e', WHITE, BLACK);
+  OLED_Text_160128RGB(34, 58, 'l', WHITE, BLACK);
+  OLED_Text_160128RGB(41, 58, 'l', WHITE, BLACK);
+  OLED_Text_160128RGB(48, 58, 'o', WHITE, BLACK);
+  OLED_Text_160128RGB(55, 58, ' ', WHITE, BLACK);
 
-  OLED_Text_160128RGB(62, 58, 55, WHITE, BLACK);   // W
-  OLED_Text_160128RGB(69, 58, 79, WHITE, BLACK);   // o
-  OLED_Text_160128RGB(76, 58, 82, WHITE, BLACK);   // r
-  OLED_Text_160128RGB(83, 58, 76, WHITE, BLACK);   // l
-  OLED_Text_160128RGB(90, 58, 68, WHITE, BLACK);   // d
-  OLED_Text_160128RGB(97, 58, 1, WHITE, BLACK);    // !
+  OLED_Text_160128RGB(62, 58, 'W', WHITE, BLACK);
+  OLED_Text_160128RGB(69, 58, 'o', WHITE, BLACK);
+  OLED_Text_160128RGB(76, 58, 'r', WHITE, BLACK);
+  OLED_Text_160128RGB(83, 58, 'l', WHITE, BLACK);
+  OLED_Text_160128RGB(90, 58, 'd', WHITE, BLACK);
+  OLED_Text_160128RGB(97, 58, '!', WHITE, BLACK);
 
   OLED_Icon_160128RGB(120, 52);                    // show icon
 
